@@ -40,4 +40,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     })->name('admin.dashboard');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/commande', function () {
+        return view('commande');
+    })->name('commande.index');
+});
+
 require __DIR__.'/auth.php';
