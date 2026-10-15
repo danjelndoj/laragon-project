@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/commande', function () {
         return view('commande');
     })->name('commande.index');
+});
+
+Route::get('/', function () {
+    $categories = DB::table('categories')->get();
+    $topVentes = DB::table('produits')->take(4)->get();
+
+    return view('welcome', compact('categories', 'topVentes'));
 });
 
 require __DIR__.'/auth.php';
