@@ -29,9 +29,9 @@
             <h2 class="text-2xl font-bold text-gray-900 mb-6">Nos catégories</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 @forelse($categories as $categorie)
-                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center hover:border-amber-600 transition">
+                    <a href="{{ route('categories.show', $categorie->id) }}" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center hover:border-amber-600 transition block">
                         <h3 class="text-lg font-semibold text-gray-800">{{ $categorie->nom }}</h3>
-                    </div>
+                    </a>
                 @empty
                     <p class="text-sm text-gray-500">Aucune catégorie disponible.</p>
                 @endforelse
@@ -50,8 +50,8 @@
                         </div>
                         <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
                             <span class="text-xl font-bold text-amber-700">{{ number_format($produit->prix, 2, ',', ' ') }} €</span>
-                            <a href="{{ route('commande.index') }}" class="px-3 py-1.5 bg-amber-700 text-white text-xs font-semibold rounded hover:bg-amber-800 transition">
-                                Commander
+                            <a href="{{ route('produits.show', $produit->id) }}" class="px-3 py-1.5 bg-amber-700 text-white text-xs font-semibold rounded hover:bg-amber-800 transition">
+                                Découvrir
                             </a>
                         </div>
                     </div>

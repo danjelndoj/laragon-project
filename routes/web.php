@@ -54,4 +54,24 @@ Route::get('/', function () {
     return view('welcome', compact('categories', 'topVentes'));
 });
 
+// liste des produits par catégorie
+Route::get('/categories/{id}', function ($id) {
+    $categorie = DB::table('categories')->where('id', $id)->first();
+    abort_if(!$categorie, 404);
+
+    $produits = DB::table('produits')->where('categorie_id', $id)->get();
+
+    return view('catalogue', compact('categorie', 'produits'));
+})->name('categories.show');
+
+// fiche produit détaillée
+Route::get('/produits/{id}', function ($id) {
+    $produit = DB::table('produits')->where('id', $id)->first();
+    abort_if(!$produit, 404);
+
+    $categorie = DB::table('categories')->where('id', $produit->categorie_id)->first();
+
+    return view('produit', compact('produit', 'categorie'));
+})->name('produits.show');
+
 require __DIR__.'/auth.php';
